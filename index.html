@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Configurações básicas: codificação de caracteres e responsividade mobile -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Link para o arquivo de estilos CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <title>Portfólio - Thiago Collaço Kioshima</title>
+</head>
+<body>
+
+    <!-- Cabeçalho contendo a barra de navegação -->
+    <header id="navbar">
+        <nav>
+            <!-- Logotipo ou iniciais da marca pessoal -->
+            <span class="nav-logo">TCK</span>
+            
+            <!-- Links de navegação para Desktop -->
+            <ul class="nav-links">
+                <li><a href="#person" class="active">Início</a></li>
+                <li><a href="#about">Sobre Mim</a></li>
+                <li><a href="#formation">Formação</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            
+            <!-- Ações à direita: troca de tema e botão do menu mobile -->
+            <div class="nav-right">
+                <button id="theme-toggle">Alternar Tema</button>
+                <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu exclusivo para dispositivos móveis (exibido via JavaScript) -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul>
+                <li><a href="#person">Início</a></li>
+                <li><a href="#about">Sobre Mim</a></li>
+                <li><a href="#formation">Formação</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Seção Principal (Hero Section): Boas-vindas e Stacks -->
+    <section id="person">
+        <div class="person-content">
+            <div class="person-name">
+                <h1>Bem vindo<span></span></h1>
+                <h1>ao portfólio de<span></span></h1>
+                <h1>Thiago Collaço Kioshima<span></span></h1>        
+            </div>
+            
+            <!-- Vitrine de tecnologias utilizadas (HTML, CSS, JS) -->
+            <div class="stack-content">
+                <h3>Powered by:</h3>
+                <div class="stacks">
+                    <ul>
+                        <li><div data-name="HTML"><img src="./svg/html.svg" alt="Ícone HTML"></div></li>
+                        <li><div data-name="CSS"><img src="./svg/css.svg" alt="Ícone CSS"></div></li>
+                        <li><div data-name="JS"><img src="./svg/js.svg" alt="Ícone JS"></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil: Foto e links para redes profissionais -->
+        <div class="person-background">
+            <div class="wrapper-profile-photo">
+                <img class="profile-photo" src="./img/tckds.jpg" alt="Foto de Thiago Kioshima">
+            </div>
+            <div class="links">
+                <a href="https://github.com/ThiagoKioshima" target="_blank"><img src="./svg/logo-github.svg" alt="Link GitHub"></a>
+                <a href="https://www.instagram.com/collacokioshima/" target="_blank"><img src="./svg/logo-insta.svg" alt="Link Instagram"></a>
+                <a href="https://linkedin.com/in/thiago-kioshima-7b4875357" target="_blank"><img src="./svg/logo-linkedin.svg" alt="Link Linkedin"></a>
+            </div>
+        </div>
+    </section> 
+    
+    <!-- Seção "Sobre Mim": Trajetória profissional e pessoal -->
+    <section id="about">
+        <div class="background-about">
+            <div class="img-wrapper">
+                <img src="./img/tela2.jpg" alt="Fundo tecnológico">
+            </div>
+        </div>
+        <div class="box-about">
+            <div class="section-subtitle">
+                <h2>Sobre Mim</h2>
+                <p>Analista de Dados em Saúde & Estudante de Ciência de Dados</p>
+            </div>
+            <p><strong>Olá! Meu nome é Thiago Collaco Kioshima.</strong> ...</p>
+            <!-- Detalhes sobre atuação na Neo Concept e estudos na Uninter -->
+        </div>
+    </section>
+
+    <!-- Seção de Formação: Educação e áreas de especialização -->
+    <section id="formation">
+        <div class="background-formation">
+            <div class="img-wrapper">
+                <img src="./img/formacao.jpg" alt="Fundo formacao">
+            </div>
+        </div>
+        
+        <div class="container formation-text-overlay">
+            <h2>Formação Acadêmica</h2>
+            <div class="formation-item">
+                <h3>Tecnologia em Ciência de Dados</h3>
+                <p>Centro Universitário Internacional UNINTER (Cursando)</p>
+            </div>
+            <div class="formation-item">
+                <h3>Áreas de Interesse</h3>
+                <!-- Descrição de interesses em Saúde Digital, Análise Forense e IA -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio: Cards com links para o GitHub -->
+    <section id="portfolio">
+        <div class="background-portfolio"></div>
+        
+        <div class="container portfolio-text-overlay">
+            <h2>Meus Trabalhos</h2>
+            <div class="project-grid">
+                
+                <!-- Card do Projeto Java (POO) -->
+                <div class="project-card">                    
+                    <h3>Projeto Universitário Cofrinho</h3>
+                    <p>Prática de Programação Orientada a Objetos.</p>
+                    <a href="https://github.com/ThiagoKioshima/projeto_cofrinho" target="_blank" class="btn-project">Ver Projeto</a>
+                </div>
+                
+                <!-- Card do Projeto Python (Água Verde Cartuchos) -->
+                <div class="project-card">                    
+                    <h3>Sistema Água Verde Cartuchos</h3>
+                    <p>Gestão com Python, Streamlit e MySQL.</p>
+                    <a href="https://github.com/ThiagoKioshima/projeto_aguaverde_cartuchos" target="_blank" class="btn-project">Ver Projeto</a>
+                </div>
+
+                <!-- Card do Projeto Perceptron (IA) -->
+                <div class="project-card">
+                    <h3>Treinamento de Neurônio Artificial</h3>
+                    <p>Modelo Perceptron em Machine Learning.</p>
+                    <a href="https://github.com/ThiagoKioshima/perceptron" target="_blank" class="btn-project">Ver Projeto</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato: Formulário estruturado para captura de mensagens -->
+    <section id="contact">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Seu Nome Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Seu Melhor E-mail" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                </div>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+            <!-- Div para exibir confirmação de envio via JS -->
+            <div id="formMessage"></div>
+        </div>
+    </section>
+
+    <!-- Rodapé com direitos autorais e ano fixo -->
+    <footer>
+        <p>&copy; 2026 Thiago Collaço Kioshima - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts de comportamento dinâmico -->
+    <script src="script.js"></script>
+</body>
+</html>
