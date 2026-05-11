@@ -1,0 +1,764 @@
+/* Importa a fonte Poppins do Google Fonts para tipografia moderna e limpa */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* --- VARIÁVEIS E TEMAS --- */
+/* Definição das variáveis globais para alternância entre temas (escuro e claro) */
+:root {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-blue: #2563eb; /* Azul suave e moderno para destaque */
+    --color-red: #ef4444;  /* Vermelho para detalhes e animações */
+    
+    /* Cores padrão para o tema escuro */
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --input-bg: #111111;
+    --nav-bg: rgba(0, 0, 0, 0.95);
+}
+
+/* Sobrescreve as variáveis quando a classe .light-mode está ativa no body */
+body.light-mode {
+    --bg-color: #f4f4f4;
+    --text-color: #222222;
+    --input-bg: #ffffff;
+    --nav-bg: rgba(244, 244, 244, 0.97);
+    --color-black: #f4f4f4;
+}
+
+/* --- RESET E GERAL --- */
+/* Reseta margens, preenchimentos e garante o cálculo correto do tamanho das caixas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Suaviza a rolagem da página ao clicar nos links do menu */
+    font-size: 10px; /* Define 1rem = 10px para facilitar o cálculo de tamanhos */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s; /* Transição suave ao mudar o tema */
+    overflow-x: hidden; /* Evita barras de rolagem horizontais indesejadas */
+}
+
+/* --- NAVBAR --- */
+/* Cabeçalho de navegação fixo no topo */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100; /* Garante que a barra fique por cima de todos os elementos */
+    border-bottom: 1px solid var(--color-blue);
+    background: var(--nav-bg);
+    height: 60px; 
+}
+
+#navbar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    display: none; /* Escondido em telas grandes, visível apenas no mobile */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* Efeito ao passar o mouse e link ativo no menu */
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-blue);
+    border-bottom: 2px solid var(--color-blue);
+    padding-bottom: 2px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+#theme-toggle {
+    background: var(--color-blue);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+#theme-toggle:hover {
+    opacity: 0.8;
+}
+
+/* --- HAMBURGUER (MOBILE) --- */
+.hamburger {
+    display: none; /* Escondido em desktop, ativado via media query */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Animação do botão do menu hambúrguer quando aberto */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- MENU MOBILE --- */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--nav-bg);
+    border-top: 1px solid #222;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.mobile-menu.open {
+    max-height: 400px; /* Expansão do menu ao abrir */
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 1rem 5% 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.mobile-menu ul li a {
+    display: block;
+    padding: 1.4rem 0;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a.active {
+    color: var(--color-blue);
+    padding-left: 0.8rem;
+}
+
+/* --- SECÇÃO PERSON (INTRO/HOME) --- */
+#person {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 60px; /* Compensação da barra de navegação fixa */
+}
+
+.person-content {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.person-name {
+    margin-bottom: 5rem;
+}
+
+.person-content div h1 {
+    padding: 0px 4px;
+    color: transparent; /* Oculta a cor inicialmente para a digitação ocorrer */
+    position: relative;
+    width: fit-content;
+    font-size: 4.5rem;
+    line-height: 6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sequência de animações de texto com atrasos definidos */
+.person-content div h1:nth-child(1) { animation: written_text .1s ease forwards; animation-delay: 1s; }
+.person-content div h1:nth-child(2) { animation: written_text .1s ease forwards; animation-delay: 2s; }
+.person-content div h1:nth-child(3) { animation: written_text_name .1s ease forwards; animation-delay: 3s; }
+
+.person-content div h1 span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 0;
+    height: 4.5rem;
+    background: var(--color-red);
+    animation: written_text_box 1s ease;
+}
+
+.person-content div h1:nth-child(1) span { animation-delay: .5s; }
+.person-content div h1:nth-child(2) span { animation-delay: 1.5s; }
+.person-content div h1:nth-child(3) span { animation-delay: 2.5s; }
+
+.stack-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 3.5s;
+}
+
+.stack-content h3 { font-size: 1.5rem; margin-bottom: 2rem; }
+
+.stacks ul { display: flex; list-style: none; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+.stacks ul li div { position: relative; cursor: pointer; }
+.stacks ul li img { width: 40px; transition: transform .3s ease; }
+.stacks ul li div:hover img { transform: scale(1.2); }
+
+/* Exibição do nome da stack em tooltip ao passar o mouse */
+.stacks ul li div:hover::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-red);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+}
+
+.person-background {
+    width: 50%;
+    height: calc(100vh - 0px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url('./img/telapy2.jpg');
+    background-size: cover;
+    background-position: top center;
+    z-index: 1;
+}
+
+/* Transição suave na borda esquerda da seção direita */
+.person-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px; /* Largura do efeito de transição */
+    height: 100%;
+    background: linear-gradient(to right, var(--bg-color), transparent);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Efeito de escurecimento sobre a imagem de fundo */
+.person-background::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: .7;
+    z-index: -1;
+    background:
+        linear-gradient(90deg, transparent 30%, var(--color-black)),
+        linear-gradient(180deg, transparent 30%, var(--color-black)),
+        linear-gradient(0deg, transparent 65%, var(--color-black));
+}
+
+.wrapper-profile-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--color-blue);
+    margin-bottom: 2rem;
+}
+
+.profile-photo { width: 100%; height: 100%; object-fit: cover; }
+
+.links { display: flex; gap: 20px; }
+.links img { width: 30px; filter: brightness(.8); transition: all .3s ease; }
+.links img:hover { transform: scale(1.2); filter: brightness(1); }
+
+/* --- ABOUT (SOBRE) --- */
+#about {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    scroll-margin-top: 60px;
+}
+
+.background-about { width: 50%; height: 100%; }
+
+.img-wrapper { position: relative; height: 100%; width: 100%; }
+.img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+.img-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    background: 
+        linear-gradient(.25turn, transparent 30%, var(--color-black)), 
+        linear-gradient(.5turn, transparent 30%, var(--color-black)),
+        linear-gradient(1turn, transparent 30%, var(--color-black));
+}
+
+.box-about {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+}
+
+.box-about h2 { font-size: 3.5rem; color: var(--color-blue); margin-bottom: 0.5rem; }
+.box-about p { font-size: 1.6rem; margin-bottom: 1.2rem; }
+
+/* --- FORMAÇÃO ACADÊMICA --- */
+#formation {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    scroll-margin-top: 60px; 
+}
+
+.background-formation { 
+    width: 50%; 
+    height: 100%; 
+}
+
+.formation-text-overlay {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;   
+    box-sizing: border-box;
+    padding: 4rem 5%; 
+}
+
+#formation h2 { 
+    font-size: 3.5rem; 
+    color: var(--color-blue); 
+    margin-bottom: 2rem; 
+}
+
+.formation-item { 
+    margin-bottom: 2.5rem; 
+    width: 100%;
+}
+.formation-item h3 { font-size: 2rem; color: var(--color-blue); margin-bottom: 0.5rem; }
+.formation-item p { font-size: 1.4rem; margin-bottom: 0.8rem; color: var(--text-color); }
+
+/* --- PORTFOLIO --- */
+#portfolio {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    scroll-margin-top: 60px;
+}
+
+.background-portfolio { 
+    width: 50%; 
+    height: 100%; 
+    background-image: url('./img/projects.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+
+.background-portfolio::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    background: 
+        linear-gradient(.25turn, transparent 30%, var(--color-black)), 
+        linear-gradient(.5turn, transparent 30%, var(--color-black)),
+        linear-gradient(1turn, transparent 30%, var(--color-black));
+}
+
+.portfolio-text-overlay {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;   
+    box-sizing: border-box;
+    padding: 4rem 5%; 
+}
+
+#portfolio h2 { 
+    font-size: 3.5rem; 
+    color: var(--color-blue); 
+    margin-bottom: 2rem; 
+}
+
+.project-grid {
+    display: grid;
+    /* Define 3 colunas de igual proporção em telas de desktop */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: var(--input-bg);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.8rem; /* Padding otimizado para caber 3 caixas lado a lado */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+}
+
+body.light-mode .project-card {
+    background: #ffffff;
+    border-color: #ddd;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-blue);
+}
+
+.project-card h3 {
+    font-size: 2rem;
+    color: var(--color-blue);
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.btn-project {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    background: var(--color-blue);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.btn-project:hover {
+    opacity: 0.8;
+}
+
+/* --- SEÇÃO DE CONTATO --- */
+#contact {
+    padding: 10rem 5%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-margin-top: 60px;
+}
+
+.container { width: 100%; max-width: 900px; text-align: center; }
+
+#contact h2 { 
+    font-size: 3.5rem; 
+    color: var(--color-blue); 
+    margin-bottom: 2rem; 
+}
+
+/* --- FORMULÁRIO --- */
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#contactForm input, #contactForm textarea {
+    padding: 1.5rem;
+    background: var(--input-bg);
+    border: 1px solid #333;
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1.4rem; /* Tamanho padronizado para boa legibilidade */
+    width: 100%;
+}
+
+#contactForm textarea { 
+    height: 150px; 
+    resize: none; 
+}
+
+#contactForm button {
+    padding: 1.5rem;
+    background: var(--color-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 1.6rem; 
+    border-radius: 5px;
+}
+
+#contactForm button:hover { 
+    opacity: 0.8; 
+}
+
+/* --- MENSAGEM DO FORMULÁRIO --- */
+.form-msg {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-msg--success {
+    background: #003300;
+    color: #00ff88;
+    border: 1px solid #00ff88;
+}
+
+.form-msg--error {
+    background: #330000;
+    color: #ff4444;
+    border: 1px solid #ff4444;
+}
+
+body.light-mode .form-msg--success {
+    background: #e6fff4;
+    color: #006633;
+    border-color: #00aa55;
+}
+
+body.light-mode .form-msg--error {
+    background: #fff0f0;
+    color: #cc0000;
+    border-color: #ff4444;
+}
+
+/* --- RODAPÉ --- */
+footer {
+    padding: 3rem;
+    text-align: center;
+    border-top: 1px solid #333;
+    font-size: 1.2rem;
+}
+
+/* --- KEYFRAMES --- */
+@keyframes written_text { 100% { color: var(--text-color); } }
+@keyframes written_text_name { 100% { color: var(--color-blue); } }
+@keyframes fadeIn { 100% { opacity: 1; } }
+@keyframes written_text_box {
+    50% { width: 100%; left: 0; }
+    100% { width: 0; left: 100%; }
+}
+
+/* ================================================
+   RESPONSIVIDADE (TABLET E MOBILE)
+   ================================================ */
+@media (max-width: 1024px) {
+    .project-grid {
+        /* Ajusta para 2 colunas em telas menores ou notebooks */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    html { font-size: 9px; }
+
+    .nav-links { display: none; }
+    .nav-logo  { display: block; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+
+    #person {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding-top: 6rem;
+    }
+
+    .person-content {
+        width: 100%;
+        height: auto;
+        padding: 4rem 5% 6rem;
+        text-align: center;
+    }
+
+    .person-background {
+        width: 100%;
+        height: 40vh;
+        order: -1;
+    }
+
+    /* Ajuste do degradê no mobile */
+    .person-background::before {
+        width: 100%;
+        height: 60px; /* Transição vertical para telas mobile */
+        background: linear-gradient(to bottom, var(--bg-color), transparent);
+    }
+
+    .person-background::after {
+        background:
+            linear-gradient(180deg, transparent 40%, var(--color-black)),
+            linear-gradient(0deg, transparent 40%, var(--color-black));
+    }
+
+    .wrapper-profile-photo {
+        width: 180px;
+        height: 180px;
+    }
+
+    .person-name { margin-bottom: 3rem; }
+
+    .person-content div h1 {
+        font-size: 3rem;
+        line-height: 4.5rem;
+    }
+
+    .person-content div h1 span { height: 3rem; }
+
+    #about, #formation, #portfolio {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .background-about, .background-formation, .background-portfolio {
+        width: 100%;
+        height: 35vh;
+        flex-shrink: 0;
+    }
+
+    .img-wrapper::after {
+        background:
+            linear-gradient(180deg, transparent 40%, var(--color-black)),
+            linear-gradient(0deg, transparent 40%, var(--color-black));
+    }
+
+    .box-about, .formation-text-overlay, .portfolio-text-overlay {
+        width: 100%;
+        padding: 4rem 6%;
+    }
+
+    .box-about h2, #formation h2, #portfolio h2 { font-size: 2.8rem; }
+    .box-about p, .formation-item p, .project-card p { font-size: 1.6rem; }
+    .formation-item h3 { font-size: 1.8rem; }
+
+    /* Ajuste para o grid dos projetos empilhar completamente em mobile */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .background-portfolio {
+        display: none;
+    }
+
+    #formation, #portfolio, #contact { padding: 7rem 5%; }
+    h2 { font-size: 2.8rem; margin-bottom: 3rem; }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 8px; }
+
+    .person-background { height: 42vh; }
+
+    .wrapper-profile-photo {
+        width: 140px;
+        height: 140px;
+        border-width: 3px;
+    }
+
+    .links img { width: 25px; }
+    .person-content { padding: 3rem 6% 5rem; }
+
+    .person-content div h1 {
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .person-content div h1 span { height: 2.4rem; }
+    .person-name { margin-bottom: 2.5rem; }
+    .stack-content h3 { font-size: 1.4rem; }
+
+    .stacks ul { gap: 1.5rem; }
+    .stacks ul li img { width: 32px; }
+
+    .background-about, .background-formation, .background-portfolio { height: 30vh; }
+
+    .box-about, .formation-text-overlay, .portfolio-text-overlay { padding: 3rem 6%; }
+    .box-about h2, #formation h2, #portfolio h2 { font-size: 2.2rem; }
+    .box-about p, .formation-item p, .project-card p { font-size: 1.4rem; margin-bottom: 1.2rem; }
+    .formation-item h3 { font-size: 1.6rem; }
+
+    #formation, #portfolio, #contact { padding: 6rem 5%; }
+    h2 { font-size: 2.2rem; margin-bottom: 2.5rem; }
+
+    #contactForm input, #contactForm textarea { padding: 1.2rem; }
+    #contactForm button { font-size: 1.4rem; padding: 1.2rem; }
+
+    footer { font-size: 1.1rem; padding: 2rem; }
+}
